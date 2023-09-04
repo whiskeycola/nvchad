@@ -61,12 +61,23 @@ local plugins = {
         "markdown",
         "markdown_inline",
         "rust",
+        "bash",
+        "git_config",
+        "gitignore",
+        "go",
+        "json",
+        "proto",
+        "python",
+        "regex",
+        "scss",
+        "sql",
+        "toml",
+        "twig",
+        "yaml",
+        "xml",
       },
       indent = {
         enable = true,
-        -- disable = {
-        --   "python"
-        -- },
       },
     },
   },
@@ -76,6 +87,12 @@ local plugins = {
     opts = {
       git = {
         enable = true,
+      },
+
+      sync_root_with_cwd = true,
+
+      view = {
+        width = 35,
       },
 
       renderer = {
@@ -160,8 +177,11 @@ local plugins = {
     init = function()
       require("core.utils").load_mappings "rust_tools"
     end,
-    config = function()
-      require "custom.configs.rust-tools"
+    opts = function()
+      return require "custom.configs.rust-tools"
+    end,
+    config = function(_, opts)
+      require("rust-tools").setup(opts)
     end,
   },
 
@@ -182,6 +202,30 @@ local plugins = {
     end,
   },
 
+  {
+    "pmizio/typescript-tools.nvim",
+    ft = { "typsescript", "typescriptreact", "typescript.tsx", "javascript", "javascriptreact", "javascript.jsx" },
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = function()
+      return require "custom.configs.typescript-tools"
+    end,
+    config = function(_, opts)
+      require("typescript-tools").setup(opts)
+    end,
+  },
+  -- {
+  --   "pmizio/typescript-tools.nvim",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "neovim/nvim-lspconfig",
+  --   },
+  --   opts = function()
+  --     return require "custom.configs.typescript-tools"
+  --   end,
+  --   config = function(_, opts)
+  --     require("typescript-tools").setup(opts)
+  --   end,
+  -- },
   -- To make a plugin not be loaded
   -- {
 
