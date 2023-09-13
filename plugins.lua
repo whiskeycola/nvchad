@@ -91,6 +91,11 @@ local plugins = {
 
       sync_root_with_cwd = true,
 
+      filters = {
+        dotfiles = false,
+        git_ignored = false,
+      },
+
       view = {
         width = 35,
       },
@@ -211,6 +216,13 @@ local plugins = {
     end,
     config = function(_, opts)
       require("typescript-tools").setup(opts)
+    end,
+  },
+  {
+    "mustache/vim-mustache-handlebars",
+    ft = { "handlebars" },
+    config = function()
+      require("vim-mustache-handlebars").setup()
     end,
   },
   -- {
