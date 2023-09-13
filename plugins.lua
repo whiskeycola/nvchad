@@ -219,11 +219,11 @@ local plugins = {
     end,
   },
   {
-    "mustache/vim-mustache-handlebars",
-    ft = { "handlebars" },
-    config = function()
-      require("vim-mustache-handlebars").setup()
-    end,
+    "whiskeycola/vim-mustache-handlebars",
+    ft = { "html", "handlebars" },
+    -- config = function()
+    --   require("vim-mustache-handlebars").setup()
+    -- end,
   },
   -- {
   --   "pmizio/typescript-tools.nvim",
