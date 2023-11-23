@@ -34,7 +34,9 @@ local plugins = {
         "html-lsp",
         "typescript-language-server",
         "prettierd",
+        "prettier",
         "tailwindcss-language-server",
+        "djlint",
 
         -- c/cpp stuff
         "clangd",
@@ -50,6 +52,7 @@ local plugins = {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
+        "htmldjango",
         "vim",
         "lua",
         "html",
@@ -206,7 +209,15 @@ local plugins = {
       require("core.utils").load_mappings "dap"
     end,
   },
+  {
+    "rust-lang/rust.vim",
+    ft = "rust",
+    init = function()
+      vim.g.rustfmt_autosave = 1
+    end,
+  },
 
+  -- typescript
   {
     "pmizio/typescript-tools.nvim",
     ft = { "typsescript", "typescriptreact", "typescript.tsx", "javascript", "javascriptreact", "javascript.jsx" },
@@ -220,7 +231,7 @@ local plugins = {
   },
   {
     "whiskeycola/vim-mustache-handlebars",
-    ft = { "html", "handlebars" },
+    ft = { "handlebars" },
     -- config = function()
     --   require("vim-mustache-handlebars").setup()
     -- end,

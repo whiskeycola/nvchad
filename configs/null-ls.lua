@@ -16,23 +16,20 @@ local on_attach = function(client, bufnr)
   end
 end
 local b = null_ls.builtins
+
 local sources = {
 
   -- webdev stuff
   -- b.formatting.deno_fmt, -- choosed deno for ts/js files cuz its very fast!
-  -- b.formatting.prettier.with {
-  --   filetypes = {
-  --     "html",
-  --     "markdown",
-  --     "css",
-  --     "typescryptreact",
-  --     "handlebars",
-  --     "hbs",
-  --     "html.handlebars",
-  --     "html.mustache",
-  --   },
-  -- }, -- so prettier works only on these filetypes
+  b.formatting.prettierd.with {
+    filetypes = {
+      "htmldjango",
+      "handlebars",
+    },
+  },
   b.formatting.prettierd,
+
+  b.formatting.djlint,
 
   -- Lua
   b.formatting.stylua,
@@ -40,7 +37,7 @@ local sources = {
   -- cpp
   b.formatting.clang_format,
 
-  b.formatting.rustfmt,
+  -- b.formatting.rustfmt,
 }
 
 null_ls.setup {
