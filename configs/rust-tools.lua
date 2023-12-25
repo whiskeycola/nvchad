@@ -5,6 +5,11 @@ local options = {
   server = {
     on_attach = on_attach,
     capabilities = capabilities,
+    -- settings = {
+    --   ['rust-analyzer'] = {
+    --     rustfmt
+    --   }
+    -- }
   },
 }
 return options

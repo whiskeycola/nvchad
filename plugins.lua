@@ -2,24 +2,22 @@
 local plugins = {
 
   -- Override plugin definition options
-
   {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      -- format & linting
-      {
-        "jose-elias-alvarez/null-ls.nvim",
-        config = function()
-          require "custom.configs.null-ls"
-        end,
-      },
-    },
     config = function()
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
     end, -- Override to setup mason-lspconfig
   },
 
+  {
+    "mhartington/formatter.nvim",
+    -- cmd = { "Format", "FormatWrite" },
+    event = "VeryLazy",
+    opts = function()
+      return require "custom.configs.formatter"
+    end,
+  },
   -- override plugin configs
   {
     "williamboman/mason.nvim",
@@ -37,7 +35,7 @@ local plugins = {
         "prettier",
         "tailwindcss-language-server",
         "djlint",
-
+        "prettier",
         -- c/cpp stuff
         "clangd",
         "clang-format",
@@ -53,6 +51,7 @@ local plugins = {
     opts = {
       ensure_installed = {
         "htmldjango",
+        -- "glimmer",
         "vim",
         "lua",
         "html",
@@ -83,6 +82,13 @@ local plugins = {
         enable = true,
       },
     },
+
+    -- config = function(_, opts)
+    --   dofile(vim.g.base46_cache .. "syntax")
+    --
+    --   require "custom.configs.treesitter"
+    --   require("nvim-treesitter.configs").setup(opts)
+    -- end,
   },
 
   {
@@ -113,7 +119,20 @@ local plugins = {
       },
     },
   },
-
+  -- {
+  --   "laytan/tailwind-sorter.nvim",
+  --   dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-lua/plenary.nvim" },
+  --   build = "cd formatter && npm i && npm run build",
+  --   ft = { "handlebars" },
+  --
+  --   cmd = { "TailwindSort" },
+  --   config = function()
+  --     require("tailwind-sorter").setup {
+  --       on_save_enabled = true,
+  --       on_save_pattern = { "*.hbs" },
+  --     }
+  --   end,
+  -- },
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -148,11 +167,9 @@ local plugins = {
 
   {
     "NvChad/nvterm",
-    opts = {
-      terminals = {
-        shell = "/home/dima/.cargo/bin/nu",
-      },
-    },
+    opts = { terminals = {
+      shell = "/home/dima/.cargo/bin/nu",
+    } },
   },
 
   -- Install a plugin
@@ -236,6 +253,7 @@ local plugins = {
     --   require("vim-mustache-handlebars").setup()
     -- end,
   },
+  --
   -- {
   --   "pmizio/typescript-tools.nvim",
   --   dependencies = {
