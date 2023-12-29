@@ -1,6 +1,5 @@
 ---@type NvPluginSpec[]
 local plugins = {
-
   -- Override plugin definition options
   {
     "neovim/nvim-lspconfig",
@@ -168,7 +167,7 @@ local plugins = {
   {
     "NvChad/nvterm",
     opts = { terminals = {
-      shell = "/home/dima/.cargo/bin/nu",
+      shell = "/usr/bin/zsh",
     } },
   },
 
