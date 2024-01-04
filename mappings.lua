@@ -4,6 +4,11 @@ local M = {}
 M.general = {
   n = {
     [";"] = { ":", "enter command mode", opts = { nowait = true } },
+
+    ["<leader>t"] = {
+      "<cmd> exe 'silent !kitty --detach --directory ' . getcwd() <CR>",
+      "open terminal new window",
+    },
   },
 }
 
