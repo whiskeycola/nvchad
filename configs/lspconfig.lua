@@ -20,11 +20,11 @@ lspconfig.html.setup {
 lspconfig.tailwindcss.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  init_options = {
-    userLanguages = {
-      rust = "html",
-    },
-  },
+  -- init_options = {
+  --   userLanguages = {
+  --     rust = "html",
+  --   },
+  -- },
   filetypes = {
     "aspnetcorerazor",
     "astro",
@@ -74,6 +74,6 @@ lspconfig.tailwindcss.setup {
     "typescriptreact",
     "vue",
     "svelte",
-    "rust",
+    -- "rust",
   },
 }
