@@ -20,103 +20,17 @@ local plugins = {
   -- override plugin configs
   {
     "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
-        -- lua stuff
-        "lua-language-server",
-        "stylua",
-
-        -- web dev stuff
-        "css-lsp",
-        "html-lsp",
-        "typescript-language-server",
-        "prettierd",
-        "prettier",
-        "tailwindcss-language-server",
-        "djlint",
-        "prettier",
-        -- c/cpp stuff
-        "clangd",
-        "clang-format",
-
-        -- rust
-        "rust-analyzer",
-      },
-    },
+    opts = require "custom.configs.mason",
   },
 
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = {
-        "htmldjango",
-        -- "glimmer",
-        "vim",
-        "lua",
-        "html",
-        "css",
-        "javascript",
-        "typescript",
-        "tsx",
-        "c",
-        "markdown",
-        "markdown_inline",
-        "rust",
-        "bash",
-        "git_config",
-        "gitignore",
-        "go",
-        "json",
-        "proto",
-        "python",
-        "regex",
-        "scss",
-        "sql",
-        "toml",
-        "twig",
-        "yaml",
-        "xml",
-      },
-      indent = {
-        enable = true,
-      },
-    },
-
-    -- config = function(_, opts)
-    --   dofile(vim.g.base46_cache .. "syntax")
-    --
-    --   require "custom.configs.treesitter"
-    --   require("nvim-treesitter.configs").setup(opts)
-    -- end,
+    opts = require "custom.configs.treesitter",
   },
 
   {
     "nvim-tree/nvim-tree.lua",
-    opts = {
-      git = {
-        enable = true,
-      },
-
-      sync_root_with_cwd = true,
-
-      filters = {
-        dotfiles = false,
-        git_ignored = false,
-      },
-
-      view = {
-        width = 35,
-      },
-
-      renderer = {
-        highlight_git = true,
-        icons = {
-          show = {
-            git = true,
-          },
-        },
-      },
-    },
+    opts = require "custom.configs.nvim-tree",
   },
   -- {
   --   "laytan/tailwind-sorter.nvim",
@@ -193,22 +107,51 @@ local plugins = {
   },
 
   -- rust
+  -- {
+  --   "simrat39/rust-tools.nvim",
+  --   enable = true,
+  --   dependencies = "neovim/nvim-lspconfig",
+  --   ft = "rust",
+  --   init = function()
+  --     require("core.utils").load_mappings "rust_tools"
+  --   end,
+  --   opts = function()
+  --     return require "custom.configs.rust-tools"
+  --   end,
+  --   config = function(_, opts)
+  --     require("rust-tools").setup(opts)
+  --   end,
+  -- },
   {
-    "simrat39/rust-tools.nvim",
+    "mrcjkb/rustaceanvim",
+    version = "^4", -- Recommended
+    lazy = false,
+    ft = { "rust" },
 
-    dependencies = "neovim/nvim-lspconfig",
-    ft = "rust",
-    init = function()
-      require("core.utils").load_mappings "rust_tools"
-    end,
-    opts = function()
-      return require "custom.configs.rust-tools"
-    end,
-    config = function(_, opts)
-      require("rust-tools").setup(opts)
+    config = function()
+      vim.g.rustaceanvim = {
+        server = {
+          on_attach = function(client, bufnr)
+            if vim.lsp.inlay_hint then
+              -- vim.lsp.inlay_hint.enable(bufnr, true)
+              vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+            end
+
+            local on_attach = require("plugins.configs.lspconfig").on_attach
+            on_attach(client, bufnr)
+          end,
+        },
+      }
+
+      require("core.utils").load_mappings "rustaceanvim"
     end,
   },
-
+  -- {
+  --   "mrcjkb/rustaceanvim",
+  --   version = "^4", -- Recommended
+  --   lazy = false, -- This plugin is already lazy
+  --   ft = { "rust" },
+  -- },
   {
     "saecki/crates.nvim",
     ft = { "rust", "toml" },
@@ -236,7 +179,15 @@ local plugins = {
   -- typescript
   {
     "pmizio/typescript-tools.nvim",
-    ft = { "typsescript", "typescriptreact", "typescript.tsx", "javascript", "javascriptreact", "javascript.jsx" },
+    ft = {
+      "typsescript",
+      "typescriptreact",
+      "typescript.tsx",
+      "javascript",
+      "javascriptreact",
+      "javascript.jsx",
+      "html",
+    },
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = function()
       return require "custom.configs.typescript-tools"
@@ -251,6 +202,17 @@ local plugins = {
     -- config = function()
     --   require("vim-mustache-handlebars").setup()
     -- end,
+  },
+  {
+    "olexsmir/gopher.nvim",
+    ft = "go",
+    config = function(_, opts)
+      require("gopher").setup(opts)
+      require("core.utils").load_mappings "gopher"
+    end,
+    build = function()
+      vim.cmd [[silent! GoInstallDeps]]
+    end,
   },
   --
   -- {

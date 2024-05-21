@@ -29,6 +29,23 @@ M.rust_tools = {
     },
   },
 }
+M.rustaceanvim = {
+  plugin = true,
+  n = {
+    ["<leader>k"] = {
+      function()
+        vim.cmd.RustLsp { "hover", "actions" }
+      end,
+      "Hover actions",
+    },
+    ["<leader>a"] = {
+      function()
+        vim.cmd.RustLsp "codeAction"
+      end,
+      "Hover actions",
+    },
+  },
+}
 
 M.dap = {
   plugin = true,

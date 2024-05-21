@@ -42,6 +42,7 @@ local M = {
 
     html = {
       require("formatter.filetypes.html").prettier,
+      require("formatter.filetypes.javascript").prettier,
     },
     typescript = {
       require("formatter.filetypes.typescript").prettier,
