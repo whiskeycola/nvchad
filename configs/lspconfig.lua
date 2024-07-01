@@ -13,10 +13,26 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
 end
+
+-- lspconfig.jinja_lsp.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   filetypes = { "jinja", "rust", "rs", "css", "html", "jinja.html" },
+--   root_dir = function(fname)
+--     return "."
+--     --return nvim_lsp.util.find_git_ancestor(fname)
+--   end,
+--   init_options = {
+--     templates = "./templates",
+--     backend = { "./src" },
+--     lang = "rust",
+--   },
+-- }
+
 lspconfig.html.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  filetypes = { "html", "handlebars" },
+  filetypes = { "html", "handlebars", "htmldjango", "jinja", "jinja2", "jinja.html" },
 }
 
 lspconfig.gopls.setup {
@@ -38,11 +54,12 @@ lspconfig.gopls.setup {
 lspconfig.tailwindcss.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  -- init_options = {
-  --   userLanguages = {
-  --     rust = "html",
-  --   },
-  -- },
+  init_options = {
+    userLanguages = {
+      -- rust = "html",
+      ["jinja.html"] = "html",
+    },
+  },
   filetypes = {
     "aspnetcorerazor",
     "astro",
@@ -66,6 +83,8 @@ lspconfig.tailwindcss.setup {
     "html-eex",
     "heex",
     "jade",
+    "jinja",
+    "jinja.html",
     "leaf",
     "liquid",
     "markdown",

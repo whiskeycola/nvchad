@@ -127,7 +127,6 @@ local plugins = {
     version = "^4", -- Recommended
     lazy = false,
     ft = { "rust" },
-
     config = function()
       vim.g.rustaceanvim = {
         server = {
@@ -214,20 +213,28 @@ local plugins = {
       vim.cmd [[silent! GoInstallDeps]]
     end,
   },
-  --
+  {
+    "Glench/Vim-Jinja2-Syntax",
+    ft = { "html", "" },
+  },
   -- {
-  --   "pmizio/typescript-tools.nvim",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "neovim/nvim-lspconfig",
-  --   },
-  --   opts = function()
-  --     return require "custom.configs.typescript-tools"
-  --   end,
-  --   config = function(_, opts)
-  --     require("typescript-tools").setup(opts)
-  --   end,
+  --   url = "git@gitlab.com:HiPhish/jinja.vim.git",
+  --   ft = { "jinja", "html" },
   -- },
+  --
+  {
+    "pmizio/typescript-tools.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "neovim/nvim-lspconfig",
+    },
+    opts = function()
+      return require "custom.configs.typescript-tools"
+    end,
+    config = function(_, opts)
+      require("typescript-tools").setup(opts)
+    end,
+  },
   -- To make a plugin not be loaded
   -- {
 

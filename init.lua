@@ -9,3 +9,17 @@
 --   vim.g.neovide_background_color = "#0f1117" .. alpha()
 --   vim.o.guifont = "Source Code Pro:h10"
 -- end
+-- vim.filetype.add {
+--   extension = {
+--     jinja = "jinja",
+--     jinja2 = "jinja",
+--     j2 = "jinja",
+--   },
+-- }
+-- vim.filetype.add {
+--   extension = {
+--     html = "htmldjango",
+--   },
+-- }
+
+-- vim.treesitter.language.register("htmldjango", "jinja")
